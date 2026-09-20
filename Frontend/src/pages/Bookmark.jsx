@@ -25,9 +25,9 @@ const Bookmark = () => {
 
   if (!loggedIn) {
     return (
-      <div className="ml-32 min-h-screen flex flex-col items-center justify-center text-white px-8">
+      <div className="lg:ml-32 min-h-screen flex flex-col items-center justify-center text-white px-6 text-center">
         <FaBookmark className="text-5xl text-gray-600 mb-5" />
-        <h2 className="text-2xl mb-3">Please login to see your bookmarks</h2>
+        <h2 className="text-xl sm:text-2xl mb-3">Please login to see your bookmarks</h2>
         <Link
           to="/login"
           className="bg-red-500 hover:bg-red-600 px-8 py-3 rounded-2xl font-semibold transition"
@@ -40,7 +40,7 @@ const Bookmark = () => {
 
   if (status === "loading") {
     return (
-      <div className="ml-32 min-h-screen flex items-center justify-center text-white text-2xl">
+      <div className="lg:ml-32 min-h-screen flex items-center justify-center text-white text-xl sm:text-2xl px-4 text-center">
         Loading your bookmarks...
       </div>
     );
@@ -50,7 +50,7 @@ const Bookmark = () => {
   const bookmarkedTVShows = bookmarks.filter((item) => item.type === "TV Show");
 
   return (
-    <div className="ml-32 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white px-8 py-6">
+    <div className="lg:ml-32 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white px-4 sm:px-6 lg:px-8 pt-28 lg:pt-6 pb-8">
       <SearchBar placeholder="Search your bookmarks" />
 
       {/* Movies Section */}
@@ -72,7 +72,7 @@ const Bookmark = () => {
             <p className="text-gray-400">Movies you save will appear here</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
             {bookmarkedMovies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
@@ -99,7 +99,7 @@ const Bookmark = () => {
             <p className="text-gray-400">TV shows you save will appear here</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
             {bookmarkedTVShows.map((show) => (
               <MovieCard key={show.id} movie={show} />
             ))}

@@ -44,7 +44,7 @@ const MovieCard = ({ movie }) => {
               : "https://via.placeholder.com/500x300?text=No+Image"
           }
           alt={movie.title}
-          className="w-full h-[220px] object-cover group-hover:scale-105 transition duration-500"
+          className="w-full h-[190px] sm:h-[210px] lg:h-[220px] object-cover group-hover:scale-105 transition duration-500"
         />
 
         {/* Overlay */}
@@ -80,7 +80,7 @@ const MovieCard = ({ movie }) => {
           <span>⭐ {movie.vote_average?.toFixed(1) || "N/A"}</span>
         </div>
 
-        <h2 className="text-xl font-semibold text-white line-clamp-1">
+        <h2 className="text-lg sm:text-xl font-semibold text-white line-clamp-1">
           {movie.title}
         </h2>
       </div>

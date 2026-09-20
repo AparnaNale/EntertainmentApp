@@ -33,10 +33,10 @@ const Trending = () => {
   }, []);
 
   return (
-    <div className="ml-32 min-h-screen text-white p-8">
+    <div className="lg:ml-32 min-h-screen text-white px-4 sm:px-6 lg:px-8 pt-28 lg:pt-8 pb-8">
       <SearchBar placeholder="Search for movies or tv shows" />
 
-      <h1 className="text-2xl mb-8 tracking-wide">Trending</h1>
+      <h1 className="text-2xl sm:text-3xl mb-6 sm:mb-8 tracking-wide">Trending</h1>
 
       <Swiper
         modules={[Navigation]}

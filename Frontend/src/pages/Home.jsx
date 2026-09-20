@@ -55,7 +55,7 @@ const Home = () => {
   };
 
   return (
-    <div className="lg:ml-32 min-h-screen text-white px-4 sm:px-6 lg:px-8 py-6 overflow-hidden pb-24">
+    <div className="lg:ml-32 min-h-screen text-white px-4 sm:px-6 lg:px-8 pt-28 lg:pt-6 pb-24 overflow-hidden">
       <SearchBar placeholder="Search for movies or TV shows" />
 
       <section className="mb-12">

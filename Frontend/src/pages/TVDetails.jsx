@@ -80,7 +80,7 @@ const TVDetails = () => {
 
   if (!show) {
     return (
-      <div className="ml-32 min-h-screen bg-black text-white flex items-center justify-center text-3xl font-bold">
+      <div className="lg:ml-32 min-h-screen bg-black text-white flex items-center justify-center text-2xl sm:text-3xl font-bold px-4 text-center">
         Loading...
       </div>
     );
@@ -90,8 +90,8 @@ const TVDetails = () => {
   const runtime = show.episode_run_time?.[0];
 
   return (
-    <div className="ml-32 min-h-screen bg-black text-white">
-      <div className="relative h-[500px] w-full">
+    <div className="lg:ml-32 min-h-screen bg-black text-white">
+      <div className="relative h-[260px] sm:h-[380px] lg:h-[500px] w-full">
         <img
           src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
           alt={show.title}
@@ -100,9 +100,9 @@ const TVDetails = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
       </div>
 
-      <div className="relative z-10 px-8 lg:px-16 -mt-64 pb-20">
-        <div className="flex flex-col lg:flex-row gap-12">
-          <div className="lg:w-[28%]">
+      <div className="relative z-10 px-4 sm:px-8 lg:px-16 -mt-20 sm:-mt-40 lg:-mt-64 pb-20">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12">
+          <div className="w-40 sm:w-56 lg:w-[28%] mx-auto lg:mx-0">
             <img
               src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
               alt={show.title}
@@ -116,7 +116,7 @@ const TVDetails = () => {
               <span className="text-sm font-medium">Trending Now</span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-black leading-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black leading-tight mb-4 sm:mb-6">
               {show.title}
             </h1>
 
@@ -187,7 +187,7 @@ const TVDetails = () => {
                     );
                   }
                 }}
-                className="flex items-center gap-3 bg-blue-500 hover:bg-blue-600 px-10 py-4 rounded-2xl font-bold text-lg transition duration-300 hover:scale-105"
+                className="flex items-center gap-3 bg-blue-500 hover:bg-blue-600 px-6 sm:px-10 py-3 sm:py-4 rounded-2xl font-bold text-base sm:text-lg transition duration-300 hover:scale-105"
               >
                 <FaPlay />
                 Watch Trailer
@@ -195,7 +195,7 @@ const TVDetails = () => {
 
               <button
                 onClick={toggle}
-                className="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-10 py-4 rounded-2xl font-bold text-lg transition duration-300 hover:scale-105"
+                className="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-6 sm:px-10 py-3 sm:py-4 rounded-2xl font-bold text-base sm:text-lg transition duration-300 hover:scale-105"
               >
                 {isBookmarked ? (
                   <FaBookmark className="text-blue-400" />
@@ -206,29 +206,29 @@ const TVDetails = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-14">
-              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-3xl">
-                <p className="text-gray-400 mb-2">Status</p>
-                <h3 className="font-bold text-lg">{show.status}</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 mt-10 sm:mt-14">
+              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-4 sm:p-6 rounded-2xl sm:rounded-3xl">
+                <p className="text-gray-400 text-sm sm:text-base mb-1 sm:mb-2">Status</p>
+                <h3 className="font-bold text-base sm:text-lg">{show.status}</h3>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-3xl">
-                <p className="text-gray-400 mb-2">Language</p>
-                <h3 className="font-bold text-lg uppercase">
+              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-4 sm:p-6 rounded-2xl sm:rounded-3xl">
+                <p className="text-gray-400 text-sm sm:text-base mb-1 sm:mb-2">Language</p>
+                <h3 className="font-bold text-base sm:text-lg uppercase">
                   {show.original_language}
                 </h3>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-3xl">
-                <p className="text-gray-400 mb-2">Popularity</p>
-                <h3 className="font-bold text-lg">
+              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-4 sm:p-6 rounded-2xl sm:rounded-3xl">
+                <p className="text-gray-400 text-sm sm:text-base mb-1 sm:mb-2">Popularity</p>
+                <h3 className="font-bold text-base sm:text-lg">
                   {show.popularity?.toFixed(0)}
                 </h3>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-3xl">
-                <p className="text-gray-400 mb-2">Episodes</p>
-                <h3 className="font-bold text-lg">{show.number_of_episodes}</h3>
+              <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-4 sm:p-6 rounded-2xl sm:rounded-3xl">
+                <p className="text-gray-400 text-sm sm:text-base mb-1 sm:mb-2">Episodes</p>
+                <h3 className="font-bold text-base sm:text-lg">{show.number_of_episodes}</h3>
               </div>
             </div>
           </div>

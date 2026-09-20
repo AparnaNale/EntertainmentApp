@@ -21,14 +21,14 @@ const Movies = () => {
   }, []);
 
   return (
-    <div className="ml-32 min-h-screen text-white p-8">
+    <div className="lg:ml-32 min-h-screen text-white px-4 sm:px-6 lg:px-8 pt-28 lg:pt-8 pb-8">
       <SearchBar placeholder="Search for movies" />
 
-      <div className="mb-10">
-        <h1 className="text-2xl tracking-wide">Movies</h1>
+      <div className="mb-6 sm:mb-10">
+        <h1 className="text-2xl sm:text-3xl tracking-wide">Movies</h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}

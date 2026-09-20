@@ -41,13 +41,13 @@ const SearchPage = () => {
   }, [query]);
 
   return (
-    <div className="ml-32 min-h-screen text-white p-8">
+    <div className="lg:ml-32 min-h-screen text-white px-4 sm:px-6 lg:px-8 pt-28 lg:pt-8 pb-8">
       <SearchBar placeholder="Search for movies or TV shows" />
 
       {movies.length === 0 ? (
-        <div className="text-gray-400 text-xl">No movies found</div>
+        <div className="text-gray-400 text-lg sm:text-xl">No movies found</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 mt-4">
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
