@@ -1,4 +1,5 @@
 import {
+  FaHome,
   FaFire,
   FaFilm,
   FaTv,
@@ -25,32 +26,41 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const loggedIn = isLoggedIn();
-  const user = getUser(); 
+  const user = getUser();
 
   const navigation = [
     {
-      label: <FaFire />,
+      label: "Home",
+      icon: <FaHome />,
+      href: "/",
+      end: true,
+    },
+    {
+      label: "Trending",
+      icon: <FaFire />,
       href: "/trending",
     },
     {
-      label: <FaFilm />,
+      label: "Movies",
+      icon: <FaFilm />,
       href: "/movies",
     },
     {
-      label: <FaTv />,
+      label: "TV Shows",
+      icon: <FaTv />,
       href: "/tv",
     },
     {
-      label: <FaBookmark />,
+      label: "Saved",
+      icon: <FaBookmark />,
       href: "/bookmark",
     },
   ];
 
-  
   const handleLogout = () => {
 
-    logout(); 
-    dispatch(clearBookmarks()); 
+    logout();
+    dispatch(clearBookmarks());
 
     window.location.href = "/";
 
@@ -59,58 +69,96 @@ const Navbar = () => {
   return (
 
     <>
-    
-      <div className="lg:hidden fixed top-0 left-0 w-full z-50 px-4 py-4">
 
-        <div className="bg-black/80 backdrop-blur-2xl border border-white/10 rounded-3xl px-5 py-4 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+      {/* ===== MOBILE: slim top bar (logo + profile) ===== */}
+      <div className="lg:hidden fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-2xl border-b border-white/10">
 
-          <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-4 py-3">
 
-            <Link
-              to="/"
-              className="flex items-center gap-3"
+          <Link
+            to="/"
+            className="flex items-center gap-2.5"
+          >
+
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-lg">
+              🎬
+            </div>
+
+            <h1 className="text-white text-lg font-bold tracking-tight">
+              Entertainment
+            </h1>
+
+          </Link>
+
+          <div className="relative">
+
+            <button
+              onClick={() => setShowProfileMenu((v) => !v)}
+              className="block"
             >
+              <img
+                src={user?.profileImage || userIcon}
+                alt="user"
+                className="w-9 h-9 rounded-full border-2 border-red-500 object-cover"
+              />
+            </button>
 
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-2xl">
+            {showProfileMenu && (
+              <>
+                {/* backdrop to close on outside tap */}
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setShowProfileMenu(false)}
+                ></div>
 
-                🎬
+                <div className="absolute right-0 mt-3 w-44 bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl p-3 shadow-[0_10px_40px_rgba(0,0,0,0.6)] z-50">
 
-              </div>
+                  {loggedIn ? (
 
-              <h1 className="text-white text-xl font-bold">
-                Entertainment
-              </h1>
+                    <div className="flex flex-col gap-1">
 
-            </Link>
+                      {user?.name && (
+                        <p className="text-white text-sm text-center mb-2 truncate">
+                          {user.name}
+                        </p>
+                      )}
 
-            <ul className="flex items-center gap-3">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full bg-red-500 hover:bg-red-600 text-white py-2.5 rounded-xl transition font-medium text-sm"
+                      >
+                        Logout
+                      </button>
 
-              {navigation.map((nav, index) => (
+                    </div>
 
-                <li key={index}>
+                  ) : (
 
-                  <NavLink
-                    to={nav.href}
-                    className={({ isActive }) =>
-                      `flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-300
-                      
-                      ${
-                        isActive
-                          ? "bg-red-500 text-white"
-                          : "bg-white/10 text-gray-400"
-                      }`
-                    }
-                  >
+                    <div className="flex flex-col gap-2">
 
-                    {nav.label}
+                      <Link
+                        to="/login"
+                        onClick={() => setShowProfileMenu(false)}
+                        className="bg-white/10 hover:bg-white/20 text-white text-center py-2.5 rounded-xl transition text-sm"
+                      >
+                        Login
+                      </Link>
 
-                  </NavLink>
+                      <Link
+                        to="/signup"
+                        onClick={() => setShowProfileMenu(false)}
+                        className="bg-gradient-to-r from-red-500 to-red-700 hover:opacity-90 text-white text-center py-2.5 rounded-xl transition text-sm"
+                      >
+                        Sign Up
+                      </Link>
 
-                </li>
+                    </div>
 
-              ))}
+                  )}
 
-            </ul>
+                </div>
+              </>
+            )}
 
           </div>
 
@@ -118,6 +166,46 @@ const Navbar = () => {
 
       </div>
 
+      {/* ===== MOBILE: bottom tab bar (icons + labels) ===== */}
+      <div
+        className="lg:hidden fixed bottom-0 left-0 w-full z-50 bg-black/90 backdrop-blur-2xl border-t border-white/10"
+        style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+      >
+
+        <ul className="flex items-stretch justify-between px-1">
+
+          {navigation.map((nav, index) => (
+
+            <li key={index} className="flex-1">
+
+              <NavLink
+                to={nav.href}
+                end={nav.end}
+                className={({ isActive }) =>
+                  `flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium transition-colors duration-200
+
+                  ${
+                    isActive
+                      ? "text-red-500"
+                      : "text-gray-500"
+                  }`
+                }
+              >
+
+                <span className="text-lg">{nav.icon}</span>
+                <span className="truncate">{nav.label}</span>
+
+              </NavLink>
+
+            </li>
+
+          ))}
+
+        </ul>
+
+      </div>
+
+      {/* ===== DESKTOP: left sidebar (unchanged) ===== */}
       <div className="hidden lg:flex fixed left-5 top-5 h-[94vh] w-28 bg-black/70 backdrop-blur-2xl border border-white/10 rounded-[2rem] flex-col items-center py-7 shadow-[0_20px_60px_rgba(0,0,0,0.7)] z-50">
 
         <Link
@@ -135,7 +223,9 @@ const Navbar = () => {
 
         <ul className="flex flex-col gap-7">
 
-          {navigation.map((nav, index) => (
+          {navigation
+            .filter((nav) => nav.href !== "/")
+            .map((nav, index) => (
 
             <li key={index}>
 
@@ -143,7 +233,7 @@ const Navbar = () => {
                 to={nav.href}
                 className={({ isActive }) =>
                   `flex items-center justify-center w-16 h-16 rounded-3xl text-2xl transition-all duration-300
-                  
+
                   ${
                     isActive
                       ? "bg-gradient-to-br from-red-500 to-red-700 text-white scale-110 shadow-[0_0_25px_rgba(239,68,68,0.7)]"
@@ -152,7 +242,7 @@ const Navbar = () => {
                 }
               >
 
-                {nav.label}
+                {nav.icon}
 
               </NavLink>
 
@@ -180,7 +270,7 @@ const Navbar = () => {
 
           <div
             className={`absolute bottom-20 left-1/2 -translate-x-1/2 w-44 bg-black/95 backdrop-blur-xl border border-white/10 rounded-3xl p-4 transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.6)]
-            
+
             ${
               showProfileMenu
                 ? "opacity-100 visible translate-y-0"
